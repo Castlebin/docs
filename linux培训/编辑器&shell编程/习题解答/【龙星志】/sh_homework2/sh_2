@@ -1,0 +1,39 @@
+#!/bin/sh
+
+for (( i=1; i<=10; i++ ))
+do
+	mkdir dir"$i"
+	cd dir"$i"
+	for (( j=1; j<=10; j++ ))
+	do
+		touch dir"$i"file"$j"
+	done
+	chmod u+wrx,g+rx,o+rx dir"$i"file*
+	cd ..
+done
+echo 'creating directiories and files done.'
+echo 'please input a directory number: '
+read num
+if [ "$num" -ge 1 -o "$num" -le 10 ]
+then
+	for (( i=1; i<=10; i++ ))
+	do
+		cd dir"$num"
+		mv dir"$num"file"$i" dir"$num"file"$i".bak
+		ls -1 > ../out
+		cd .. 
+	done 	
+else
+	echo 'number out of range.'
+	exit 0
+fi	
+echo 'operation is done.'
+echo "deleting dir and files with the number $num......"
+for (( i=1; i<=10; i++ ))
+do
+	rm dir"$i"/*$num*
+done
+rm -r *$num*
+echo 'deleting operation done.'
+exit 0
+	

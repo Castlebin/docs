@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo 'please input the source directory: '
+read srcdir
+echo 'please input the destination directory: '
+read destdir
+
+if test -f $destdir
+then
+	mv $srcdir/*.c $destdir
+	echo 'moving end.'
+else
+	mkdir $destdir
+	echo 'make directory end.'
+	mv $srcdir/*.c $destdir
+	echo 'moving end.'
+fi
+
+ls -sS $destdir
+
+exit 0

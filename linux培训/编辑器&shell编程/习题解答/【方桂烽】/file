@@ -1,0 +1,27 @@
+# /bin/bash
+
+if [ $# -lt 3 ]
+then
+        echo "parameter number less than 3!"
+        exit 1
+fi
+
+max=$1
+min=$1
+aver=0
+for i in $*
+do
+        if [ $i -gt $max ]
+        then
+                max=$i
+        fi
+        if [ $i -lt $min ]
+        then
+                min=$i
+        fi
+        let aver+=$i
+done
+
+echo "max number is:"$max
+echo "min number is:"$min
+echo "average is:"$(echo "scale=2;$aver/$#" | bc)
